@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -7,6 +8,7 @@ import { Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { setItems } from "../../state";
+// import { setItems } from "../../state";
 
 const ShoppingList = () => {
   const dispatch = useDispatch();
@@ -19,17 +21,16 @@ const ShoppingList = () => {
   };
 
   async function getItems() {
-    const items = await fetch(
-      "http://localhost:2000/api/items?populate=image",
-      { method: "GET" }
-    );
-    const itemsJson = await items.json();
+    const res = await fetch("http://localhost:1337/api/items?populate=image", {
+      method: "GET",
+    });
+    const itemsJson = await res.json();
     dispatch(setItems(itemsJson.data));
   }
 
   useEffect(() => {
     getItems();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const topRatedItems = items.filter(
     (item) => item.attributes.category === "topRated"
@@ -43,7 +44,10 @@ const ShoppingList = () => {
 
   return (
     <Box width="80%" margin="80px auto">
-      <Typography variant="h3" textAlign="center">
+      <Typography
+        textAlign="center"
+        sx={{ fontSize: "24px", textTransform: "capitalize" }}
+      >
         Our Featured <b>Products</b>
       </Typography>
       <Tabs
@@ -74,19 +78,19 @@ const ShoppingList = () => {
         columnGap="1.33%"
       >
         {value === "all" &&
-          items.map((item) => (
+          items?.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
         {value === "newArrivals" &&
-          newArrivalsItems.map((item) => (
+          newArrivalsItems?.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
         {value === "bestSellers" &&
-          bestSellersItems.map((item) => (
+          bestSellersItems?.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
         {value === "topRated" &&
-          topRatedItems.map((item) => (
+          topRatedItems?.map((item) => (
             <Item item={item} key={`${item.name}-${item.id}`} />
           ))}
       </Box>
