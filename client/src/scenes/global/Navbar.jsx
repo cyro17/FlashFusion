@@ -8,6 +8,7 @@ import {
   ShoppingBagOutlined,
   MenuOutlined,
 } from "@mui/icons-material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { setIsCartOpen } from "../../state";
 
 function Navbar() {
@@ -75,7 +76,7 @@ function Navbar() {
               onClick={() => dispatch(setIsCartOpen({}))}
               sx={{ color: "black" }}
             >
-              <ShoppingBagOutlined />
+              <AddShoppingCartIcon color="" />
             </IconButton>
           </Badge>
           <IconButton sx={{ color: "black" }}>
