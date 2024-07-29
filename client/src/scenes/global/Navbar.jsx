@@ -5,7 +5,6 @@ import { shades } from "../../theme";
 import {
   SearchOutlined,
   PersonOutline,
-  ShoppingBagOutlined,
   MenuOutlined,
 } from "@mui/icons-material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";

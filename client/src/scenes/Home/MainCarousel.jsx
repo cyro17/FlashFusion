@@ -103,14 +103,13 @@ const MainCarousel = () => {
 export default MainCarousel;
 
 const images = {
-  image1:
-    "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbnxlbnwwfDB8MHx8fDA%3D",
+  image1: "https://images.pexels.com/photos/8074593/pexels-photo-8074593.jpeg",
   image2:
     "https://images.unsplash.com/photo-1505022610485-0249ba5b3675?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGZhc2hpb258ZW58MHwwfDB8fHww",
   image3:
     "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGNsb3RoZXN8ZW58MHwwfDB8fHww",
   image4:
-    "https://plus.unsplash.com/premium_photo-1682125440423-b04969c89ee0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZHJlc3N8ZW58MHwwfDB8fHww",
+    "https://img.freepik.com/premium-photo/smiling-student-hipster-girl-with-backpack-going-vacation_149155-4405.jpg",
   image5:
     "https://images.unsplash.com/photo-1515541474431-4d8de9207620?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGZhc2hpb24lMjBtb2RlbCUyMGJveXxlbnwwfDB8MHx8fDA%3D",
   image6:

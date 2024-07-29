@@ -3,7 +3,7 @@ import { Box, Typography, TextField } from "@mui/material";
 
 const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
   return (
-    <Box>
+    <Box m="30px 0">
       <Box>
         <Typography sx={{ mb: "15px" }} fontSize="18px">
           Contact Info

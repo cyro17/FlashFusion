@@ -4,9 +4,9 @@ import { Formik } from "formik";
 import { useState } from "react";
 import * as yup from "yup";
 import { shades } from "../../theme";
+import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
-import Payment from "./Payment";
 
 const stripePromise = loadStripe(
   "pk_test_51PfRxrRxag7j52K6XwHgf1uF21HRiDpp9EsC2DyfSx6UTmWUjP6fL3zOcQKJo6ch1E74M1jf32JzWQf1VtmmwpRj004Q7UBXbG"
@@ -18,7 +18,12 @@ const Checkout = () => {
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
 
+  console.log(cart);
+
   const handleFormSubmit = async (values, actions) => {
+    setActiveStep(activeStep + 1);
+
+    // this copies the billing address onto shipping address
     if (isFirstStep && values.shippingAddress.isSameAddress) {
       actions.setFieldValue("shippingAddress", {
         ...values.billingAddress,
@@ -29,14 +34,23 @@ const Checkout = () => {
     if (isSecondStep) {
       makePayment(values);
     }
+
+    actions.setTouched({});
   };
 
   async function makePayment(values) {
+    console.log(values);
     const stripe = await stripePromise;
     const requestBody = {
-      userName: [values.firstName, values.lastName].join(" "),
-      email: values.email,
-      products: cart.map(({ id, count }) => ({ id, count })),
+      userName: [
+        values.billingAddress.firstName,
+        values.billingAddress.lastName,
+      ].join(" "),
+      email: values?.email,
+      products: cart.map(({ id, count }) => ({
+        id,
+        count,
+      })),
     };
 
     const response = await fetch("http://localhost:1337/api/orders", {
@@ -44,7 +58,6 @@ const Checkout = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestBody),
     });
-
     const session = await response.json();
     await stripe.redirectToCheckout({
       sessionId: session.id,
@@ -97,7 +110,6 @@ const Checkout = () => {
                   setFieldValue={setFieldValue}
                 />
               )}
-
               <Box display="flex" justifyContent="space-between" gap="50px">
                 {!isFirstStep && (
                   <Button
@@ -129,7 +141,7 @@ const Checkout = () => {
                     padding: "15px 40px",
                   }}
                 >
-                  {!isSecondStep ? "Next" : "Place Order"}
+                  {isFirstStep ? "Next" : "Place Order"}
                 </Button>
               </Box>
             </form>
